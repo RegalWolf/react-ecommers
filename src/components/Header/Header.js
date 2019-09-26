@@ -1,10 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { auth } from '../../utils/Firebase/Firebase';
 
 import './Header.scss';
 import { ReactComponent as Logo } from '../../assets/images/Logo.svg';
 
-const Header = () => {
+const Header = ({ currentUser }) => {
+  const menuHandle = () => {
+    return currentUser ? (
+      <div onClick={() => auth.signOut()} className='header-menu__item'>
+        <span className="header-menu__title">
+          SIGN OUT
+        </span>
+      </div>
+    ) : (
+      <Link to='/signin' className='header-menu__item'>
+        <span className='header-menu__title'>
+          SIGN IN
+        </span>
+      </Link>
+    );
+  }
+
   return (
     <header className="header">
       <Link className='header-box' to="/">
@@ -21,6 +38,7 @@ const Header = () => {
             CONTACT
           </span>
         </Link>
+        {menuHandle()}
       </div>
     </header>
   );

@@ -4,6 +4,7 @@ import './SignIn.scss';
 
 import FormInput from '../../components/FormInput/FormInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
+import { signInWithGoogle } from '../../utils/Firebase/Firebase';
 
 const SignIn = () => {
   const [state, setState] = useState({
@@ -53,9 +54,14 @@ const SignIn = () => {
           label="password"
           required
         />
-        <CustomButton type="submit">
-          Sign In
-        </CustomButton>
+        <div className="sign-in__button">
+          <CustomButton type="submit">
+            Sign In
+          </CustomButton>
+          <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
+            Sign In With Google
+          </CustomButton>
+        </div>
       </form>
     </div>
   );
